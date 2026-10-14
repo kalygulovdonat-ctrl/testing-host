@@ -1,0 +1,105 @@
+{
+ "cats": ["Кроссовки", "Кеды", "Беговые"],
+ "prods": [
+  {
+   "id": "p1",
+   "n": "SB Dunk Low Pro",
+   "b": "Nike",
+   "cat": "Кроссовки",
+   "p": 13990,
+   "old": 0,
+   "sz": [40, 41, 42, 43, 44, 45],
+   "colors": [
+    { "n": "Серый/белый", "h": "#b9bcc2", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2023_Nike_SB_Dunk_Low_Pro_%281%29.jpg/960px-2023_Nike_SB_Dunk_Low_Pro_%281%29.jpg" }
+   ]
+  },
+  {
+   "id": "p2",
+   "n": "Air Force 1 '07",
+   "b": "Nike",
+   "cat": "Кроссовки",
+   "p": 11990,
+   "old": 13490,
+   "sz": [39, 40, 41, 42, 43, 44],
+   "colors": [
+    { "n": "Белый", "h": "#f2f2ee", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Air_Force_1_%283199944288%29.jpg/960px-Air_Force_1_%283199944288%29.jpg" },
+    { "n": "Чёрный", "h": "#232323", "img": "" }
+   ]
+  },
+  {
+   "id": "p3",
+   "n": "Samba OG",
+   "b": "adidas",
+   "cat": "Кеды",
+   "p": 12490,
+   "old": 0,
+   "sz": [38, 39, 40, 41, 42, 43],
+   "colors": [
+    { "n": "Чёрный", "h": "#26262a", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Adidas_Samba_OG.jpg/960px-Adidas_Samba_OG.jpg" },
+    { "n": "Белый", "h": "#efece4", "img": "" }
+   ]
+  },
+  {
+   "id": "p4",
+   "n": "Campus 00s",
+   "b": "adidas",
+   "cat": "Кеды",
+   "p": 10990,
+   "old": 0,
+   "sz": [38, 39, 40, 41, 42, 43],
+   "colors": [
+    { "n": "Коричневый", "h": "#8a5a3b", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Adidas_Campus_00s.jpg/960px-Adidas_Campus_00s.jpg" }
+   ]
+  },
+  {
+   "id": "p5",
+   "n": "550",
+   "b": "New Balance",
+   "cat": "Кроссовки",
+   "p": 12990,
+   "old": 14990,
+   "sz": [39, 40, 41, 42, 43, 44],
+   "colors": [
+    { "n": "Белый/зелёный", "h": "#d8dcd2", "img": "https://upload.wikimedia.org/wikipedia/commons/7/75/New_Balance_550.jpg" },
+    { "n": "Серый", "h": "#9aa0a6", "img": "" }
+   ]
+  },
+  {
+   "id": "p6",
+   "n": "574",
+   "b": "New Balance",
+   "cat": "Кроссовки",
+   "p": 9990,
+   "old": 0,
+   "sz": [39, 40, 41, 42, 43, 44, 45],
+   "colors": [
+    { "n": "Серый", "h": "#a7a49c", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/New_Balance_574.jpg/960px-New_Balance_574.jpg" }
+   ]
+  },
+  {
+   "id": "p7",
+   "n": "Gel-Kayano 14",
+   "b": "Asics",
+   "cat": "Беговые",
+   "p": 16990,
+   "old": 0,
+   "sz": [40, 41, 42, 43, 44],
+   "colors": [
+    { "n": "Бежевый", "h": "#d6c9b4", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Gel-Kayano_14_Artizia.jpg/960px-Gel-Kayano_14_Artizia.jpg" }
+   ]
+  },
+  {
+   "id": "p8",
+   "n": "Smash Leather",
+   "b": "Puma",
+   "cat": "Кроссовки",
+   "p": 8990,
+   "old": 10490,
+   "sz": [38, 39, 40, 41, 42, 43],
+   "colors": [
+    { "n": "Белый", "h": "#f0efe9", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Puma_Smash_Leather.jpg/960px-Puma_Smash_Leather.jpg" },
+    { "n": "Тёмно-синий", "h": "#2b3a55", "img": "" }
+   ]
+  }
+ ]
+}

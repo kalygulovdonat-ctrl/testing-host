@@ -1,0 +1,13 @@
+{
+  "name": "shag-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Магазин кроссовок ШАГ: сайт, админка, JSON-база, загрузка фото. Без зависимостей.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

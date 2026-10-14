@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ШАГ · магазин кроссовок</title>
+<meta name="description" content="ШАГ: оригинальные кроссовки Nike, adidas, New Balance, Asics и Puma. Доставка в день заказа, примерка до оплаты, возврат 30 дней." />
+<script id="auto-designer-preview-contract" type="application/json">
+{
+  "artifactRole": "web-page",
+  "authoringViewport": { "width": 1440, "height": 900 },
+  "deviceAdaptation": { "enabled": true, "strategy": "responsive", "supportedDevices": ["desktop", "tablet", "mobile"] },
+  "breakpoints": { "mobileMax": 767, "tabletMin": 768, "tabletMax": 1023, "desktopMin": 1024 },
+  "defaultDevice": "canvas"
+}
+</script>
+<style>
+  /* tokens: all raw hex lives here only */
+  :root{
+    --c-bg:#f1f1ee;      --c-surface:#ffffff;  --c-fg:#1a1a18;  --c-muted:#5d5c56;
+    --c-border:#dcdad2;  --c-accent:#c93400;   --c-btnfg:#ffffff;
+    --c-bg-d:#141412;    --c-surface-d:#1d1d1a;--c-fg-d:#f0efe9;--c-muted-d:#a5a49c;
+    --c-border-d:#33332c;--c-accent-d:#ff6a2b; --c-btnfg-d:#141412;
+
+    --bg:var(--c-bg); --surface:var(--c-surface); --fg:var(--c-fg); --muted:var(--c-muted);
+    --border:var(--c-border); --accent:var(--zwork-preview-accent, var(--c-accent)); --btnfg:var(--c-btnfg);
+
+    --font-display:'Bahnschrift','Helvetica Neue','Arial',sans-serif;
+    --font-body:var(--zwork-preview-font-family,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif);
+    --font-mono:'Consolas',ui-monospace,'SF Mono',Menlo,monospace;
+
+    --motion:var(--zwork-preview-motion,1);
+    --fs-h1:calc(clamp(40px,5.2vw,68px) * var(--zwork-preview-type-scale,1));
+    --fs-h2:calc(clamp(28px,3.4vw,44px) * var(--zwork-preview-type-scale,1));
+    --fs-h3:19px;
+    --sec-pad:calc(clamp(56px,7vw,96px) * var(--zwork-preview-density,1));
+    --container:1160px; --gutter:24px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:var(--c-bg-d); --surface:var(--c-surface-d); --fg:var(--c-fg-d); --muted:var(--c-muted-d);
+      --border:var(--c-border-d); --accent:var(--zwork-preview-accent, var(--c-accent-d)); --btnfg:var(--c-btnfg-d);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:var(--c-bg-d); --surface:var(--c-surface-d); --fg:var(--c-fg-d); --muted:var(--c-muted-d);
+    --border:var(--c-border-d); --accent:var(--zwork-preview-accent, var(--c-accent-d)); --btnfg:var(--c-btnfg-d);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--font-body); font-size:16px; line-height:1.55;
+    text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+  }
+  body.locked{ overflow:hidden; }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font:inherit; cursor:pointer; color:inherit; background:none; border:0; padding:0; }
+  h1,h2,h3{ text-wrap:balance; }
+  p{ text-wrap:pretty; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .container{ max-width:var(--container); margin-inline:auto; padding-inline:var(--gutter); }
+  .section{ padding-block:var(--sec-pad); }
+  .section + .section, .pagefoot{ border-top:1px solid var(--border); }
+  .row{ display:flex; align-items:center; gap:16px; }
+  .row-between{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .h2{ font-family:var(--font-display); font-size:var(--fs-h2); font-weight:700; line-height:1.05; letter-spacing:-.02em; margin:0; }
+  .lead{ font-size:18px; line-height:1.6; color:var(--muted); max-width:56ch; margin:0; }
+  .meta{ font-family:var(--font-mono); font-size:12px; letter-spacing:.02em; color:var(--muted); }
+  .num{ font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+
+  .topnav{
+    position:sticky; top:0; z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .topnav-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:64px; }
+  .logo{ font-family:var(--font-display); font-weight:700; font-size:22px; letter-spacing:-.02em; white-space:nowrap; }
+  .logo b{ color:var(--accent); font-weight:700; }
+  .topnav nav{ display:flex; gap:22px; }
+  .topnav nav a{ font-size:14px; color:var(--muted); font-weight:500; }
+  .topnav nav a:hover{ color:var(--fg); }
+  .iconbtn{
+    position:relative; display:inline-grid; place-items:center;
+    width:40px; height:40px; border:1px solid var(--border); border-radius:0;
+    transition:border-color .15s var(--ease);
+  }
+  .iconbtn:hover{ border-color:var(--fg); }
+  .iconbtn svg{ width:19px; height:19px; }
+  .badge{
+    position:absolute; top:-7px; right:-7px; min-width:18px; height:18px; padding-inline:4px;
+    display:grid; place-items:center;
+    background:var(--accent); color:var(--btnfg);
+    font-family:var(--font-mono); font-size:11px; line-height:1;
+  }
+  :root[data-theme="dark"] .i-sun{ display:none; }
+  :root:not([data-theme="dark"]) .i-moon{ display:none; }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 24px; border:1px solid var(--border); border-radius:0;
+    font-size:15px; font-weight:600; letter-spacing:.02em; white-space:nowrap;
+    transition:transform calc(.06s * var(--motion)) var(--ease), background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease);
+  }
+  .btn:active{ transform:translateY(1px); }
+  .btn-primary{ background:var(--accent); color:var(--btnfg); border-color:var(--accent); }
+  .btn-primary:hover{ background:color-mix(in srgb, var(--accent) 86%, black); border-color:color-mix(in srgb, var(--accent) 86%, black); }
+  .btn-dark{ background:var(--fg); color:var(--bg); border-color:var(--fg); }
+  .btn-dark:hover{ background:var(--accent); border-color:var(--accent); color:var(--btnfg); }
+  .btn-ghost{ background:transparent; color:var(--fg); }
+  .btn-ghost:hover{ border-color:var(--fg); }
+  .btn-arrow::after{ content:'→'; font-family:var(--font-mono); }
+  .btn[disabled]{ opacity:.45; cursor:default; }
+  .btn[disabled]:active{ transform:none; }
+
+  .hero{ padding-block:calc(64px * var(--zwork-preview-density,1)) calc(88px * var(--zwork-preview-density,1)); }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1{
+    font-family:var(--font-display); font-size:var(--fs-h1); font-weight:700;
+    line-height:1.02; letter-spacing:-.02em; margin:0 0 20px;
+  }
+  .hero .lead{ margin-bottom:32px; }
+  .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-media{ position:relative; max-width:520px; justify-self:end; width:100%; }
+  .frame{ position:relative; aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border); background:var(--surface); }
+  .frame img{ width:100%; height:100%; object-fit:cover; }
+  .sticker{
+    position:absolute; left:-14px; bottom:26px; transform:rotate(-4deg);
+    background:var(--accent); color:var(--btnfg); padding:9px 14px;
+    font-family:var(--font-mono); font-size:12px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase;
+    box-shadow:0 10px 30px color-mix(in srgb, var(--fg) 18%, transparent);
+  }
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:none;} }
+  .a1,.a2,.a3{ animation:rise calc(.55s * var(--motion)) var(--ease) backwards; }
+  .a2{ animation-delay:calc(.09s * var(--motion)); }
+  .a3{ animation-delay:calc(.18s * var(--motion)); }
+
+  .cat-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:26px; }
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+  .chip{
+    padding:9px 16px; border:1px solid var(--border); border-radius:0;
+    font-size:14px; font-weight:500; letter-spacing:.01em; color:var(--muted);
+    transition:border-color .15s var(--ease), color .15s var(--ease);
+  }
+  .chip:hover{ border-color:var(--fg); color:var(--fg); }
+  .chip[aria-pressed="true"]{ border-color:var(--accent); color:var(--accent); font-weight:600; }
+  .pgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:28px; }
+  .pcard[hidden]{ display:none; }
+  .pcard{ display:flex; flex-direction:column; }
+  .pmedia{ aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border); background:var(--surface); }
+  .pmedia img{ width:100%; height:100%; object-fit:cover; transition:transform calc(.45s * var(--motion)) var(--ease); }
+  .pcard:hover .pmedia img{ transform:scale(1.035); }
+  .pbody{ display:flex; flex-direction:column; gap:10px; padding-top:14px; }
+  .pbrand{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .pname{ font-size:16px; font-weight:600; line-height:1.3; letter-spacing:-.005em; margin:0; }
+  .pprice{ display:flex; align-items:baseline; gap:10px; font-size:15px; }
+  .pprice .old{ color:var(--muted); text-decoration:line-through; font-size:13px; }
+  .pcard .btn{ margin-top:auto; }
+  .pcard .btn.added{ background:var(--fg); border-color:var(--fg); color:var(--bg); }
+  .cat-empty{ border:1px solid var(--border); padding:44px 32px; text-align:center; }
+  .cat-empty h3{ margin:0 0 6px; font-size:var(--fs-h3); }
+  .cat-empty p{ margin:0 0 20px; color:var(--muted); }
+
+  .svc-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center; }
+  .svc-media{ aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border); background:var(--surface); }
+  .svc-media img{ width:100%; height:100%; object-fit:cover; }
+  .svc-steps{ display:flex; flex-direction:column; margin-top:32px; }
+  .step{ display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 0; border-top:1px solid var(--border); }
+  .step:first-child{ border-top:0; padding-top:0; }
+  .step h3{ font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin:2px 0 0; }
+  .step p{ margin:0; color:var(--muted); font-size:15px; max-width:46ch; }
+  .tagrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:28px; }
+  .tag{ display:inline-flex; padding:6px 12px; border:1px solid var(--border); font-size:13px; color:var(--muted); }
+
+  .cta-strip{ text-align:center; }
+  .cta-strip .lead{ margin:16px auto 30px; }
+
+  .pagefoot{ padding-block:52px; }
+  .fgrid{ display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:40px; }
+  .fgrid h4{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 12px; font-weight:700; }
+  .fgrid p, .fgrid address{ margin:0; font-style:normal; font-size:14px; color:var(--muted); line-height:1.9; }
+  .fgrid a:hover{ color:var(--fg); }
+  .fbottom{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:44px; padding-top:20px; border-top:1px solid var(--border); }
+
+  .scrim{ position:fixed; inset:0; z-index:50; background:color-mix(in srgb, var(--fg) 45%, transparent); opacity:0; visibility:hidden; transition:opacity .25s var(--ease), visibility .25s; }
+  .scrim.open{ opacity:1; visibility:visible; }
+  .drawer{
+    position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(400px,100%);
+    background:var(--surface); border-left:1px solid var(--border);
+    display:flex; flex-direction:column;
+    transform:translateX(105%); visibility:hidden;
+    transition:transform calc(.3s * var(--motion)) var(--ease), visibility .3s;
+  }
+  .drawer.open{ transform:none; visibility:visible; }
+  .dhead{ display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid var(--border); }
+  .dhead h2{ font-family:var(--font-display); font-size:21px; font-weight:700; letter-spacing:-.02em; margin:0; }
+  .dbody{ flex:1; overflow:auto; padding:8px 22px; }
+  .cline{ display:flex; justify-content:space-between; gap:14px; padding:18px 0; border-bottom:1px solid var(--border); }
+  .cinfo{ min-width:0; }
+  .cinfo .pbrand{ display:block; margin-bottom:3px; }
+  .cinfo strong{ display:block; font-size:15px; line-height:1.35; margin-bottom:5px; }
+  .cctrl{ display:flex; flex-direction:column; align-items:flex-end; gap:10px; flex:none; }
+  .cctrl select{
+    font-family:var(--font-mono); font-size:13px; padding:6px 8px;
+    border:1px solid var(--border); border-radius:0; background:var(--surface); color:var(--fg);
+  }
+  .qty{ display:inline-flex; align-items:center; border:1px solid var(--border); }
+  .qty button{ width:30px; height:30px; display:grid; place-items:center; }
+  .qty button:hover{ color:var(--accent); }
+  .qty button svg{ width:13px; height:13px; }
+  .qty span{ min-width:26px; text-align:center; font-size:13px; }
+  .cdel{ color:var(--muted); display:grid; place-items:center; width:26px; height:26px; }
+  .cdel:hover{ color:var(--accent); }
+  .cdel svg{ width:15px; height:15px; }
+  .csum{ font-size:14px; white-space:nowrap; }
+  .dempty{ text-align:center; padding:64px 12px; }
+  .dempty h3{ font-size:var(--fs-h3); margin:0 0 8px; }
+  .dempty p{ color:var(--muted); font-size:14px; margin:0 0 24px; max-width:30ch; margin-inline:auto; }
+  .dfoot{ padding:18px 22px 22px; border-top:1px solid var(--border); }
+  .dtotal{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; font-size:15px; font-weight:600; }
+  .dnote{ margin:0 0 16px; font-size:12px; color:var(--muted); }
+
+  .toast{
+    position:fixed; left:50%; bottom:26px; z-index:70; transform:translate(-50%,16px);
+    background:var(--fg); color:var(--bg); padding:12px 20px;
+    font-size:14px; opacity:0; visibility:hidden; max-width:min(90vw,420px); text-align:center;
+    transition:opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
+  }
+  .toast.show{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+
+  @media (max-width:920px){
+    .hero-grid,.svc-grid{ grid-template-columns:1fr; gap:36px; }
+    .hero-media{ justify-self:start; }
+    .fgrid{ grid-template-columns:1fr; gap:28px; }
+    .step{ grid-template-columns:1fr; gap:4px; }
+  }
+  @media (max-width:640px){
+    .topnav nav{ display:none; }
+    .hero{ padding-block:40px 64px; }
+    .sticker{ left:8px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.01ms !important; animation-delay:0ms !important; transition-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav" data-od-id="topnav">
+  <div class="container topnav-inner">
+    <a class="logo" href="#top" aria-label="ШАГ, на главную">ШАГ<b>.</b></a>
+    <nav aria-label="Основная навигация">
+      <a href="#catalog">Каталог</a>
+      <a href="#service">Доставка</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="row" style="gap:10px;">
+      <button class="iconbtn" id="themeBtn" aria-label="Переключить тему" title="Светлая или тёмная тема">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="iconbtn" id="cartBtn" aria-label="Корзина" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 3h2l2.5 12.5a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L20 7H6"/></svg>
+        <span class="badge num" id="cartCount" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" data-od-id="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1 class="a1">Примерь дома. Плати потом.</h1>
+        <p class="lead a2">Оригинальные кроссовки Nike, adidas, New Balance, Asics и Puma. Доставка в день заказа, примерка до оплаты.</p>
+        <div class="hero-cta a3">
+          <a class="btn btn-primary" href="#catalog">В каталог</a>
+          <a class="btn btn-ghost btn-arrow" href="#service">Как это работает</a>
+        </div>
+      </div>
+      <div class="hero-media a2">
+        <div class="frame">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Nike_Air_Max_90_Infrared_%284805905007%29.jpg/960px-Nike_Air_Max_90_Infrared_%284805905007%29.jpg" width="960" height="960" alt="Nike Air Max 90 Infrared" fetchpriority="high" />
+        </div>
+        <p class="sticker num">Air Max 90 · 13 990 ₽</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalog" data-od-id="catalog">
+    <div class="container">
+      <div class="cat-head">
+        <h2 class="h2">Каталог</h2>
+        <span class="meta num" id="catCount">8 моделей</span>
+      </div>
+      <div class="chips" role="group" aria-label="Фильтр по брендам" id="chips">
+        <button class="chip" data-brand="all" aria-pressed="true">Все</button>
+        <button class="chip" data-brand="nike" aria-pressed="false">Nike</button>
+        <button class="chip" data-brand="adidas" aria-pressed="false">adidas</button>
+        <button class="chip" data-brand="nb" aria-pressed="false">New Balance</button>
+        <button class="chip" data-brand="asics" aria-pressed="false">Asics</button>
+        <button class="chip" data-brand="puma" aria-pressed="false">Puma</button>
+      </div>
+      <div class="pgrid" id="pgrid">
+        <article class="pcard" data-brand="nike" data-id="p1">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2023_Nike_SB_Dunk_Low_Pro_%281%29.jpg/960px-2023_Nike_SB_Dunk_Low_Pro_%281%29.jpg" width="960" height="960" alt="Nike SB Dunk Low Pro" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">Nike</span>
+            <h3 class="pname">SB Dunk Low Pro</h3>
+            <p class="pprice num">13 990 ₽</p>
+            <button class="btn btn-dark" data-add="p1">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="nike" data-id="p2">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Air_Force_1_%283199944288%29.jpg/960px-Air_Force_1_%283199944288%29.jpg" width="960" height="960" alt="Nike Air Force 1" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">Nike</span>
+            <h3 class="pname">Air Force 1 '07</h3>
+            <p class="pprice num">11 990 ₽ <s class="old num">13 490 ₽</s></p>
+            <button class="btn btn-dark" data-add="p2">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="adidas" data-id="p3">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Adidas_Samba_OG.jpg/960px-Adidas_Samba_OG.jpg" width="960" height="960" alt="adidas Samba OG" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">adidas</span>
+            <h3 class="pname">Samba OG</h3>
+            <p class="pprice num">12 490 ₽</p>
+            <button class="btn btn-dark" data-add="p3">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="adidas" data-id="p4">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Adidas_Campus_00s.jpg/960px-Adidas_Campus_00s.jpg" width="960" height="960" alt="adidas Campus 00s" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">adidas</span>
+            <h3 class="pname">Campus 00s</h3>
+            <p class="pprice num">10 990 ₽</p>
+            <button class="btn btn-dark" data-add="p4">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="nb" data-id="p5">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/New_Balance_550.jpg" width="960" height="960" alt="New Balance 550" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">New Balance</span>
+            <h3 class="pname">550</h3>
+            <p class="pprice num">12 990 ₽ <s class="old num">14 990 ₽</s></p>
+            <button class="btn btn-dark" data-add="p5">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="nb" data-id="p6">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/New_Balance_574.jpg/960px-New_Balance_574.jpg" width="960" height="960" alt="New Balance 574" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">New Balance</span>
+            <h3 class="pname">574</h3>
+            <p class="pprice num">9 990 ₽</p>
+            <button class="btn btn-dark" data-add="p6">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="asics" data-id="p7">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Gel-Kayano_14_Artizia.jpg/960px-Gel-Kayano_14_Artizia.jpg" width="960" height="960" alt="Asics Gel-Kayano 14" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">Asics</span>
+            <h3 class="pname">Gel-Kayano 14</h3>
+            <p class="pprice num">16 990 ₽</p>
+            <button class="btn btn-dark" data-add="p7">В корзину</button>
+          </div>
+        </article>
+        <article class="pcard" data-brand="puma" data-id="p8">
+          <div class="pmedia"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Puma_Smash_Leather.jpg/960px-Puma_Smash_Leather.jpg" width="960" height="960" alt="Puma Smash Leather" loading="lazy" decoding="async" /></div>
+          <div class="pbody">
+            <span class="pbrand">Puma</span>
+            <h3 class="pname">Smash Leather</h3>
+            <p class="pprice num">8 990 ₽ <s class="old num">10 490 ₽</s></p>
+            <button class="btn btn-dark" data-add="p8">В корзину</button>
+          </div>
+        </article>
+      </div>
+      <div class="cat-empty" id="catEmpty" hidden>
+        <h3>Ничего не нашлось</h3>
+        <p>У этого бренда пока нет моделей в наличии.</p>
+        <button class="btn btn-ghost" id="resetFilter">Сбросить фильтр</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="service" data-od-id="service">
+    <div class="container svc-grid">
+      <div class="svc-media">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Aime_Leon_Dore_Store_Nike_Sneakers.jpg/960px-Aime_Leon_Dore_Store_Nike_Sneakers.jpg" width="960" height="960" alt="Полка с кроссовками в магазине" loading="lazy" decoding="async" />
+      </div>
+      <div>
+        <h2 class="h2">Примерка до оплаты</h2>
+        <div class="svc-steps">
+          <div class="step">
+            <h3>Заказ</h3>
+            <p>Выбираете пару: по Москве привозим в день заказа, по России отправляем СДЭК.</p>
+          </div>
+          <div class="step">
+            <h3>Примерка</h3>
+            <p>Курьер ждёт до 15 минут. За один заказ можно примерить до трёх пар.</p>
+          </div>
+          <div class="step">
+            <h3>Решение</h3>
+            <p>Платите только за то, что подошло. Остальное курьер забирает с собой.</p>
+          </div>
+        </div>
+        <div class="tagrow">
+          <span class="tag">Только оригинал</span>
+          <span class="tag">Возврат 30 дней</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-strip" data-od-id="cta">
+    <div class="container" style="max-width:560px;">
+      <h2 class="h2">Не нашли свою пару?</h2>
+      <p class="lead">Напишите нам: подберём модель, цвет и размер под ваш запрос.</p>
+      <a class="btn btn-primary" href="mailto:privet@shag-shop.ru">Написать в магазин</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pagefoot" id="contacts" data-od-id="footer">
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <span class="logo">ШАГ<b>.</b></span>
+        <p style="margin-top:12px; max-width:26ch;">Магазин оригинальных кроссовок с примеркой до оплаты.</p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <address>
+          <a href="tel:+74951204567">+7 (495) 120-45-67</a><br />
+          <a href="mailto:privet@shag-shop.ru">privet@shag-shop.ru</a><br />
+          Москва, Никольская, 10
+        </address>
+      </div>
+      <div>
+        <h4>Магазин</h4>
+        <p>Ежедневно 11:00-21:00<br />Возврат 30 дней<br />Фото: Wikimedia Commons, CC BY-SA</p>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span class="meta">© ШАГ, 2026</span>
+      <span class="meta">Цены: демо-прототип</span>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" aria-hidden="true"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Корзина">
+  <div class="dhead">
+    <h2>Корзина</h2>
+    <button class="iconbtn" id="closeCart" aria-label="Закрыть корзину">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="dbody">
+    <div id="cartList"></div>
+    <div class="dempty" id="cartEmpty">
+      <h3>В корзине пусто</h3>
+      <p>Добавьте пару из каталога: привезём на примерку, платите за подошедшую.</p>
+      <button class="btn btn-primary" id="emptyGo">В каталог</button>
+    </div>
+  </div>
+  <div class="dfoot" id="cartFoot">
+    <div class="dtotal"><span>Итого</span><span class="num" id="cartTotal">0 ₽</span></div>
+    <p class="dnote">Примерка бесплатна: оплата после того, как примерите.</p>
+    <button class="btn btn-primary" id="checkout" style="width:100%;">Оформить заказ</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+  var P = {
+    p1:{n:'Nike SB Dunk Low Pro', b:'Nike', p:13990},
+    p2:{n:'Nike Air Force 1 \'07', b:'Nike', p:11990},
+    p3:{n:'adidas Samba OG', b:'adidas', p:12490},
+    p4:{n:'adidas Campus 00s', b:'adidas', p:10990},
+    p5:{n:'New Balance 550', b:'New Balance', p:12990},
+    p6:{n:'New Balance 574', b:'New Balance', p:9990},
+    p7:{n:'Asics Gel-Kayano 14', b:'Asics', p:16990},
+    p8:{n:'Puma Smash Leather', b:'Puma', p:8990}
+  };
+  var $ = function(s){ return document.querySelector(s); };
+  var cart = {}; /* key id:size -> {id,size,qty}; прототип хранит корзину в памяти страницы */
+  var lastFocus = null;
+
+  function fmt(n){ return n.toLocaleString('ru-RU') + '\u00a0₽'; }
+  function toast(msg){
+    var t = $('#toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._h); toast._h = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+  function countQty(){ var k = 0; for (var key in cart) k += cart[key].qty; return k; }
+  function renderBadge(){
+    var n = countQty(), b = $('#cartCount');
+    b.hidden = n === 0; b.textContent = n;
+    $('#cartBtn').setAttribute('aria-label', 'Корзина, товаров: ' + n);
+  }
+  function renderCart(){
+    var list = $('#cartList'), empty = $('#cartEmpty'), foot = $('#cartFoot');
+    var keys = Object.keys(cart), html = '', total = 0;
+    keys.forEach(function(key){
+      var it = cart[key], pr = P[it.id]; total += pr.p * it.qty;
+      var opts = '';
+      for (var s = 36; s <= 46; s++) opts += '<option value="' + s + '"' + (s === it.size ? ' selected' : '') + '>' + s + '</option>';
+      html += '<div class="cline" data-key="' + key + '">' +
+        '<div class="cinfo"><span class="pbrand">' + pr.b + '</span><strong>' + pr.n + '</strong>' +
+        '<span class="csum num">' + fmt(pr.p * it.qty) + '</span></div>' +
+        '<div class="cctrl"><select aria-label="Размер: ' + pr.n + '">' + opts + '</select>' +
+        '<div class="qty"><button data-a="dec" aria-label="Меньше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg></button>' +
+        '<span class="num">' + it.qty + '</span>' +
+        '<button data-a="inc" aria-label="Больше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>' +
+        '<button class="cdel" data-a="del" aria-label="Удалить: ' + pr.n + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+        '</div></div>';
+    });
+    list.innerHTML = html;
+    empty.hidden = keys.length > 0;
+    foot.hidden = keys.length === 0;
+    $('#cartTotal').textContent = fmt(total);
+    renderBadge();
+  }
+  function add(id){
+    var key = id + ':42';
+    if (cart[key]) cart[key].qty++; else cart[key] = { id:id, size:42, qty:1 };
+    renderCart(); openCart();
+  }
+  function openCart(){
+    lastFocus = document.activeElement;
+    $('#drawer').classList.add('open'); $('#scrim').classList.add('open');
+    document.body.classList.add('locked');
+    $('#closeCart').focus();
+  }
+  function closeCart(){
+    $('#drawer').classList.remove('open'); $('#scrim').classList.remove('open');
+    document.body.classList.remove('locked');
+    if (lastFocus) lastFocus.focus();
+  }
+  function scrollToCatalog(){
+    closeCart();
+    var r = document.getElementById('catalog').getBoundingClientRect();
+    window.scrollTo({ top: r.top + window.scrollY - 72, behavior: 'smooth' });
+  }
+  function plural(n){
+    n = Math.abs(n) % 100; var d = n % 10;
+    if (n > 10 && n < 20) return 'моделей';
+    if (d > 1 && d < 5) return 'модели';
+    if (d === 1) return 'модель';
+    return 'моделей';
+  }
+  function applyFilter(brand){
+    var visible = 0;
+    document.querySelectorAll('.pcard').forEach(function(c){
+      var show = brand === 'all' || c.dataset.brand === brand;
+      c.hidden = !show; if (show) visible++;
+    });
+    $('#catCount').textContent = visible + ' ' + plural(visible);
+    $('#catEmpty').hidden = visible > 0;
+  }
+
+  /* theme: синхронизируем атрибут с системной настройкой, дальше переключает кнопка */
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  document.documentElement.dataset.theme = mq.matches ? 'dark' : 'light';
+  $('#themeBtn').addEventListener('click', function(){
+    var root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+
+  $('#chips').addEventListener('click', function(e){
+    var chip = e.target.closest('.chip'); if (!chip) return;
+    document.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+    applyFilter(chip.dataset.brand);
+  });
+  $('#resetFilter').addEventListener('click', function(){
+    var all = document.querySelector('.chip[data-brand="all"]');
+    all.click(); all.focus();
+  });
+  $('#pgrid').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-add]'); if (!btn) return;
+    add(btn.dataset.add);
+    btn.classList.add('added'); btn.textContent = 'Добавлено';
+    setTimeout(function(){ btn.classList.remove('added'); btn.textContent = 'В корзину'; }, 1200);
+  });
+
+  $('#cartBtn').addEventListener('click', openCart);
+  $('#closeCart').addEventListener('click', closeCart);
+  $('#scrim').addEventListener('click', closeCart);
+  $('#emptyGo').addEventListener('click', scrollToCatalog);
+  $('#checkout').addEventListener('click', function(){
+    toast('Это демо-прототип: оплата не подключена.');
+  });
+
+  $('#cartList').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-a]'); if (!btn) return;
+    var line = btn.closest('.cline'), key = line.dataset.key, it = cart[key];
+    if (btn.dataset.a === 'inc') it.qty++;
+    if (btn.dataset.a === 'dec'){ it.qty--; if (it.qty < 1) delete cart[key]; }
+    if (btn.dataset.a === 'del') delete cart[key];
+    renderCart();
+  });
+  $('#cartList').addEventListener('change', function(e){
+    var sel = e.target.closest('select'); if (!sel) return;
+    var line = sel.closest('.cline'), old = line.dataset.key, it = cart[old];
+    var next = it.id + ':' + sel.value;
+    delete cart[old];
+    if (cart[next]) { cart[next].qty += it.qty; } else { it.size = +sel.value; cart[next] = it; }
+    renderCart();
+  });
+
+  document.addEventListener('keydown', function(e){
+    var drawer = $('#drawer');
+    if (e.key === 'Escape' && drawer.classList.contains('open')) { closeCart(); return; }
+    if (e.key !== 'Tab' || !drawer.classList.contains('open')) return;
+    var f = drawer.querySelectorAll('button, select, a[href]');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
+  });
+
+  renderCart();
+})();
+</script>
+</body>
+</html>
